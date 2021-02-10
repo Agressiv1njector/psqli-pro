@@ -76,8 +76,8 @@ Powerfull Automatic Sql injection Tools Pack
 ### Instalasi
   ```bash
 $ pkg install bash curl git
-$ git clone https://github.com/Agressiv1njector/psqli_pro
-$ cd psqli_pro
+$ git clone https://github.com/Agressiv1njector/psqli-pro
+$ cd psqli-pro
 $ bash psqli.sh
 $ bash psqli.sh s #untuk string based injection only
 
