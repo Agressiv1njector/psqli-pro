@@ -30,7 +30,7 @@ Powerfull Automatic Sql injection Tools Pack
 <li> Psqli Sqli/Xss/LFI/AdminFinder Scanner
   
 ### NEW Pro feature
-<li> SQLi dork dumper
+<li> SQLi dork auto dumper + auto filter email;pass
 <li> Auto Bypass SQL Login
 <li> Dork generator
 <li> Coming soon SQL into out file
